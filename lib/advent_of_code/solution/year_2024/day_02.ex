@@ -35,6 +35,24 @@ defmodule AdventOfCode.Solution.Year2024.Day02 do
     |> Enum.count()
   end
 
-  def part2(_input) do
+  def part2(input) do
+    input
+    |> split_input()
+    |> Enum.filter(fn line ->
+      # Helper function to check if a sequence is valid
+      valid_sequence = fn sequence ->
+        Enum.all?(sequence, fn [a, b] -> abs(a - b) in 1..3 end) &&
+          (Enum.all?(sequence, fn [a, b] -> a - b > 0 end) ||
+             Enum.all?(sequence, fn [a, b] -> b - a > 0 end))
+      end
+
+      # allow at most one mistake by removing one element
+      Enum.any?(0..(length(line) - 1), fn skip_index ->
+        modified_line = List.delete_at(line, skip_index)
+        modified_chunks = Enum.chunk_every(modified_line, 2, 1, :discard)
+        valid_sequence.(modified_chunks)
+      end)
+    end)
+    |> Enum.count()
   end
 end
