@@ -22,10 +22,9 @@ defmodule AdventOfCode.Solution.Year2024.Day01Test do
     assert result == 11
   end
 
-  @tag :skip
   test "part2", %{input: input} do
     result = part2(input)
 
-    assert result
+    assert result == 31
   end
 end
