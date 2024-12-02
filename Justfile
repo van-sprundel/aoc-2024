@@ -6,7 +6,7 @@ gen year='2024':
     mix advent.gen -y{{year}}
 
 test:
-    mix tests
+    mix test
 
 solve day part year='2024':
     mix advent.solve -d {{day}} -p {{part}} -y {{year}}
